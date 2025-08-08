@@ -1,7 +1,7 @@
 # MDAS USS — FastAPI CRUD Librería
 
-CRUD en FastAPI para tablas **Autores** y **Libros** (MySQL). Incluye página de bienvenida en `/` y
-subrutas en `/crudlibreria` (creación de autor si no existe, búsqueda LIKE por libro/autor, update por ID y borrado de libro).
+CRUD en FastAPI para **Autores** y **Libros** (MySQL). Landing en `/` con links a docs.  
+Subrutas en **`/crudlibreria`**: crea autor si no existe, busca por LIKE, actualiza por ID y borra solo libro.
 
 ## Estructura
 
@@ -18,11 +18,11 @@ Dockerfile
 .env                # credenciales (ya configuradas)
 ```
 
-> Nota: El campo **año_publicacion** de MySQL se mapea como `anio_publicacion` en Python.
+
+> El campo **año_publicacion** en MySQL se mapea como `anio_publicacion` en Python.
 
 ## Variables de entorno
-
-Se leen desde `.env`:
+Crea un `.env` (a partir de `.env.example`) **solo en tu máquina/servidor**:
 
 ```
 DB_HOST=151.106.97.118
@@ -31,13 +31,18 @@ DB_PASSWORD=xxxxxxxxxxxxxx
 DB_NAME=u549055514_2024_MDAS_USS
 ```
 
-## Cómo correr localmente
 
+## Correr localmente
 ```bash
 python -m venv .venv
-source .venv/bin/activate  # en Windows: .venv\Scripts\activate
+# Linux/Mac:
+source .venv/bin/activate
+# Windows (PowerShell):
+.\.venv\Scripts\Activate.ps1
+# Windows (cmd):
+.\.venv\Scripts\activate
 pip install -r requirements.txt
-uvicorn app.main:app --reload --port 8023
+uvicorn app.main:app --host 0.0.0.0 --port 8023 --reload
 ```
 
 - Swagger: http://localhost:8023/docs
