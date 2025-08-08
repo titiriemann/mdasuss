@@ -27,7 +27,7 @@ Se leen desde `.env`:
 ```
 DB_HOST=151.106.97.118
 DB_USER=u549055514_ALUMNOS
-DB_PASSWORD=VivaChile2024
+DB_PASSWORD=xxxxxxxxxxxxxx
 DB_NAME=u549055514_2024_MDAS_USS
 ```
 
@@ -37,11 +37,11 @@ DB_NAME=u549055514_2024_MDAS_USS
 python -m venv .venv
 source .venv/bin/activate  # en Windows: .venv\Scripts\activate
 pip install -r requirements.txt
-uvicorn app.main:app --reload --port 8000
+uvicorn app.main:app --reload --port 8023
 ```
 
-- Swagger: http://localhost:8000/docs
-- ReDoc:   http://localhost:8000/redoc
+- Swagger: http://localhost:8023/docs
+- ReDoc:   http://localhost:8023/redoc
 
 ## Endpoints (prefijo `/crudlibreria`)
 
@@ -68,10 +68,10 @@ uvicorn app.main:app --reload --port 8000
 
 ```bash
 docker build -t mdasuss-crudlibreria:latest .
-docker run -d --name mdasuss-crudlibreria -p 8000:8000 --env-file .env mdasuss-crudlibreria:latest
+docker run -d --name mdasuss-crudlibreria -p 8023:8023 --env-file .env mdasuss-crudlibreria:latest
 ```
 
-Luego apunta tu reverse-proxy/Nginx a `http://localhost:8000` para el dominio `https://mdasuss.semilla42.com`.
+Luego apunta tu reverse-proxy/Nginx a `http://localhost:8023` para el dominio `https://mdasuss.semilla42.com`.
 
 ### Nginx (ejemplo con path `/`)
 
@@ -80,7 +80,7 @@ server {
   server_name mdasuss.semilla42.com;
   listen 80;
   location / {
-    proxy_pass http://127.0.0.1:8000;
+    proxy_pass http://127.0.0.1:8023;
     proxy_set_header Host $host;
     proxy_set_header X-Real-IP $remote_addr;
     proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
@@ -95,7 +95,7 @@ server {
 
 - Crea una nueva app tipo Dockerfile apuntando a este repo.
 - Configura las variables de entorno (o carga `.env`).
-- Publica el puerto 8000.
+- Publica el puerto 8023.
 - Asigna el dominio `mdasuss.semilla42.com` (root) o el que corresponda.
 
 ---
